@@ -2,8 +2,9 @@
 
 ## References:
 
-base tutorial: https://www.youtube.com/watch?v=VVn9OG9nfH0
-read more about jwt: https://jwt.io/
+- base tutorial: https://www.youtube.com/watch?v=VVn9OG9nfH0
+
+- read more about jwt: https://jwt.io/
 
 ## Quick overview
 - Install dependecices: see `pom.xml`
