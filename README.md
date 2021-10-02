@@ -1,4 +1,4 @@
-# Spring Security basic with jwt token auhentication
+# Spring Security basic with jwt token authentication
 
 ## References:
 
@@ -7,7 +7,7 @@
 - read more about jwt: https://jwt.io/
 
 ## Quick overview
-- Install dependecices: see `pom.xml`
+- Install dependencices: see `pom.xml`
 - create Entities, Repository, Service
 - you need a service which implements `UserDetailsService` and override `UserDetails loadUserByUsername(String username)` make sure that username is unique in your database
 - create a class which extends from `WebSecurityConfigurerAdapter` to config spring security
