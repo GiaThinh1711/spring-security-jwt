@@ -5,7 +5,7 @@
 base tutorial: https://www.youtube.com/watch?v=VVn9OG9nfH0
 read more about jwt: https://jwt.io/
 
-## Quisck overview
+## Quick overview
 - Install dependecices: see `pom.xml`
 - create Entities, Repository, Service
 - you need a service which implements `UserDetailsService` and override `UserDetails loadUserByUsername(String username)` make sure that username is unique in your database
