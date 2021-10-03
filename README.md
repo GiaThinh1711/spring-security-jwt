@@ -16,3 +16,8 @@
 - Implements logic for each filter 
 - Finally, create controller, path to run api.
 
+## Update Refresh token follow:
+- When access token is exprired, client sent refresh token to request a new access token
+- dont need to encode user's role along with refresh token cause we only need username to check and create new access token
+- when sending a refreshToken to get a new accessToken, it is good practice to create a new refreshToken as well. small thing but it helps, that the refreshToken always has longer expire date-time then the accessToken
+
