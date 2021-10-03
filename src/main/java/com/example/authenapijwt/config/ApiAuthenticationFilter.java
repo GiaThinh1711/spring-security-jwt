@@ -35,6 +35,7 @@ public class ApiAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     public ApiAuthenticationFilter(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
     }
+
     //this function is call first when user try to login with their user name and password
     //so here we get username and password from request body then let spring do the magic
     @Override
@@ -52,24 +53,23 @@ public class ApiAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             return null;
         }
     }
-    //when username and password is correct this function will be call and pass in current login success login funtion
+
+    //when username and password is correct this function will be call and pass in current login success information
     //so here we will return token for user
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authentication) throws IOException, ServletException {
-        User user = (User) authentication.getPrincipal(); //get user that success fully login
-        Algorithm algorithm = JwtUtil.getAlgorithm();
-        String accessToken = JWT.create()
-                .withSubject(user.getUsername())
-                .withExpiresAt(new Date(System.currentTimeMillis() + JwtUtil.ONE_DAY * 7)) //exprires after 7 days
-                .withIssuer(request.getRequestURL().toString())
-                .withClaim(JwtUtil.ROLE_CLAIM_KEY, user.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
-                .sign(algorithm);
+        User user = (User) authentication.getPrincipal(); //get user that successfully login
+        //generate tokens
 
-        String refreshToken = JWT.create()
-                .withSubject(user.getUsername())
-                .withExpiresAt(new Date(System.currentTimeMillis() + JwtUtil.ONE_DAY * 14)) //exprires after 14 days
-                .withIssuer(request.getRequestURL().toString())
-                .sign(algorithm);
+        String accessToken = JwtUtil.generateToken(user.getUsername(),
+                user.getAuthorities().iterator().next().getAuthority(),
+                request.getRequestURL().toString(),
+                JwtUtil.ONE_DAY * 7);
+
+        String refreshToken = JwtUtil.generateToken(user.getUsername(),
+                null,
+                request.getRequestURL().toString(),
+                JwtUtil.ONE_DAY * 14);
         CredentialDTO credential = new CredentialDTO(accessToken, refreshToken);
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         new ObjectMapper().writeValue(response.getOutputStream(), credential);

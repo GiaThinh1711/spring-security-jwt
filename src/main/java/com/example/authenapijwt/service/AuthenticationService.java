@@ -36,7 +36,6 @@ public class AuthenticationService implements UserDetailsService {
         if (account == null) {
             throw new UsernameNotFoundException("User not found in database");
         }
-        System.out.println(account.getRole().getName());
         Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority(account.getRole().getName()));
         return new org.springframework.security.core.userdetails.User(account.getUsername(), account.getPassword(), authorities);
@@ -68,4 +67,8 @@ public class AuthenticationService implements UserDetailsService {
         return new AccountDTO(save);
     }
 
+    public Account getAccount(String username) {
+        Optional<Account> byUsername = accountRepository.findByUsername(username);
+        return byUsername.orElse(null);
+    }
 }
