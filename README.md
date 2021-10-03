@@ -7,7 +7,7 @@
 - Read more about jwt: https://jwt.io/
 
 ## Quick overview
-- Install dependencices: see `pom.xml`
+- Install dependencices: view `pom.xml`
 - Create Entities, Repository, Service
 - You need a service which implements `UserDetailsService` and override `UserDetails loadUserByUsername(String username)` make sure that username is unique in your database
 - Create a class which extends from `WebSecurityConfigurerAdapter` to config spring security
