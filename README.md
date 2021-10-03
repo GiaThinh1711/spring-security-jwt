@@ -17,7 +17,7 @@
 - Finally, create controller, path to run api.
 
 ## Update: Refresh token follow:
-- When access token is exprired, client sent refresh token to request a new access token
+- When access token is exprired, client send refresh token to request a new access token
 - Don't need to encode user's role along with refresh token cause we only need username to check and create new access token
 - Ưhen sending a refreshToken to get a new accessToken, it is good practice to create a new refreshToken as well. small thing but it helps, that the refreshToken always has longer expire date-time then the accessToken
 
